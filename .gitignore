@@ -1,0 +1,21 @@
+node_modules/
+dist/
+out/
+build/Release/
+
+# Editor / OS junk
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.log
+*.tsbuildinfo
+
+# Environment
+.env
+.env.local
+*.pem
+*.p12
+
+# Electron-builder cache
+.cache/

@@ -1,0 +1,128 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self'" />
+    <title>Cursor HighLighter</title>
+    <link rel="stylesheet" href="settings.css" />
+  </head>
+  <body>
+    <div class="card">
+      <div class="header">
+        <div>
+          <div class="title">Cursor HighLighter</div>
+          <div class="subtitle" id="statusText">Ring on</div>
+        </div>
+        <label class="switch" title="Enable / disable highlight">
+          <input type="checkbox" id="enabled" />
+          <span class="track"></span>
+        </label>
+      </div>
+
+      <div class="preview">
+        <div id="previewRing"></div>
+        <div id="previewKeys" class="preview-keys">⇧⌘4</div>
+      </div>
+
+      <div class="section">
+        <div class="row">
+          <label class="name" for="ringColor">Ring Color</label>
+          <input type="color" id="ringColor" />
+        </div>
+        <div class="row">
+          <label class="name" for="leftClickColor">Left Click</label>
+          <input type="color" id="leftClickColor" />
+        </div>
+        <div class="row">
+          <label class="name" for="rightClickColor">Right Click</label>
+          <input type="color" id="rightClickColor" />
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="row">
+          <label class="name" for="size">Size</label>
+          <input type="range" id="size" min="24" max="160" step="2" />
+          <span class="val" id="sizeVal"></span>
+        </div>
+        <div class="row">
+          <label class="name" for="width">Width</label>
+          <input type="range" id="width" min="2" max="20" step="1" />
+          <span class="val" id="widthVal"></span>
+        </div>
+        <div class="row">
+          <label class="name" for="opacity">Opacity</label>
+          <input type="range" id="opacity" min="10" max="100" step="5" />
+          <span class="val" id="opacityVal"></span>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="row">
+          <label class="name" for="showKeys">Show Keystrokes</label>
+          <label class="switch">
+            <input type="checkbox" id="showKeys" />
+            <span class="track"></span>
+          </label>
+        </div>
+        <div class="row">
+          <label class="name" for="launchAtLogin">Launch at Login</label>
+          <label class="switch">
+            <input type="checkbox" id="launchAtLogin" />
+            <span class="track"></span>
+          </label>
+        </div>
+        <div class="row">
+          <label class="name">Toggle Shortcut</label>
+          <button id="shortcutBtn" class="chip" type="button" title="Click, then press a key combo">
+            <span id="shortcutLabel">⌘⇧H</span>
+          </button>
+        </div>
+      </div>
+
+      <p class="hint" id="hint">
+        Clicks and keystrokes require Accessibility access.
+        <a href="#" id="openA11y">Open System Settings</a>
+      </p>
+
+      <div class="links">
+        <a href="#" id="openReadme" title="View the project README on GitHub">
+          <svg width="12" height="12" viewBox="0 0 16 16" aria-hidden="true">
+            <path fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"
+              d="M3.5 2.5h6L12.5 5v8.5h-9z M9.5 2.5V5h3M5.5 8h5M5.5 10.5h5" />
+          </svg>
+          README
+        </a>
+        <span class="dot">•</span>
+        <a href="#" id="openIssue" title="Report a bug or request a feature">
+          <svg width="12" height="12" viewBox="0 0 16 16" aria-hidden="true">
+            <circle cx="8" cy="8" r="5.5" fill="none" stroke="currentColor" stroke-width="1.4"/>
+            <path fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" d="M8 5.5v3.2M8 10.8v.01"/>
+          </svg>
+          Report Issue
+        </a>
+        <span class="dot">•</span>
+        <a href="#" id="openRepo" title="View source on GitHub">GitHub</a>
+      </div>
+
+      <div class="footer">
+        <button class="ghost" id="reset" title="Restore all settings to defaults">
+          <svg class="btn-icon" width="14" height="14" viewBox="0 0 16 16" aria-hidden="true">
+            <path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"
+              d="M2.5 8a5.5 5.5 0 1 0 1.6-3.9M2.5 3v3h3" />
+          </svg>
+          <span>Reset</span>
+        </button>
+        <button class="quit" id="quit" title="Quit Cursor HighLighter">
+          <svg class="btn-icon" width="14" height="14" viewBox="0 0 16 16" aria-hidden="true">
+            <path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"
+              d="M8 2.2v6M4.4 4.8a5.2 5.2 0 1 0 7.2 0" />
+          </svg>
+          <span>Quit</span>
+        </button>
+      </div>
+    </div>
+
+    <script src="settings.js"></script>
+  </body>
+</html>

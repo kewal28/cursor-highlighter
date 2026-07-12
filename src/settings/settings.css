@@ -1,0 +1,309 @@
+:root {
+  --bg: rgba(38, 38, 40, 0.97);
+  --row: rgba(255, 255, 255, 0.06);
+  --border: rgba(255, 255, 255, 0.14);
+  --divider: rgba(255, 255, 255, 0.08);
+  --text: rgba(255, 255, 255, 0.92);
+  --muted: rgba(255, 255, 255, 0.55);
+  --accent: #34c759;
+  --danger: #ff6459;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: transparent;
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI',
+    'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  user-select: none;
+  cursor: default;
+}
+
+a {
+  color: #7ab8ff;
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+.card {
+  margin: 6px;
+  background: var(--bg);
+  border-radius: 14px;
+  border: 0.5px solid var(--border);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.45);
+  overflow: hidden;
+  color: var(--text);
+}
+
+/* Header ------------------------------------------------------------ */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 14px 10px;
+  gap: 10px;
+}
+.title {
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.1;
+}
+.subtitle {
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 2px;
+}
+
+.switch {
+  position: relative;
+  width: 38px;
+  height: 22px;
+  flex: none;
+  cursor: pointer;
+}
+.switch input {
+  display: none;
+}
+.switch .track {
+  position: absolute;
+  inset: 0;
+  border-radius: 11px;
+  background: rgba(255, 255, 255, 0.18);
+  transition: background 150ms ease;
+}
+.switch .track::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #fff;
+  transition: transform 150ms ease;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+.switch input:checked + .track {
+  background: var(--accent);
+}
+.switch input:checked + .track::after {
+  transform: translateX(16px);
+}
+
+/* Preview -------------------------------------------------------- */
+.preview {
+  position: relative;
+  height: 130px;
+  margin: 0 14px;
+  border-radius: 10px;
+  background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.05), transparent 60%),
+    #1b1b1d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+#previewRing {
+  border-radius: 50%;
+  box-sizing: border-box;
+  transition: border-color 90ms ease, box-shadow 90ms ease;
+}
+.preview-keys {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(20, 20, 22, 0.85);
+  color: #fff;
+  font-size: 13px;
+  padding: 4px 10px;
+  border-radius: 8px;
+  letter-spacing: 2px;
+  opacity: 0.85;
+  border: 0.5px solid rgba(255, 255, 255, 0.12);
+}
+
+/* Rows ---------------------------------------------------------------- */
+.section {
+  margin: 12px 14px 0;
+  background: var(--row);
+  border-radius: 10px;
+  overflow: hidden;
+}
+.row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 9px 12px;
+  min-height: 38px;
+}
+.row + .row {
+  border-top: 0.5px solid var(--divider);
+}
+.row label.name {
+  font-size: 12.5px;
+  color: var(--text);
+  flex: none;
+}
+
+input[type='color'] {
+  width: 44px;
+  height: 24px;
+  padding: 0;
+  border: 0.5px solid rgba(255, 255, 255, 0.25);
+  border-radius: 6px;
+  background: transparent;
+  cursor: pointer;
+}
+input[type='color']::-webkit-color-swatch-wrapper {
+  padding: 2px;
+}
+input[type='color']::-webkit-color-swatch {
+  border: none;
+  border-radius: 4px;
+}
+
+input[type='range'] {
+  -webkit-appearance: none;
+  appearance: none;
+  flex: 1;
+  height: 4px;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.22);
+  outline: none;
+}
+input[type='range']::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 17px;
+  height: 17px;
+  border-radius: 50%;
+  background: #ffffff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.35);
+  cursor: pointer;
+}
+.val {
+  font-size: 11px;
+  color: var(--muted);
+  width: 40px;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  flex: none;
+}
+
+.chip {
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.14);
+  border: 0.5px solid rgba(255, 255, 255, 0.18);
+  padding: 4px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  letter-spacing: 1px;
+  min-width: 74px;
+  text-align: center;
+  transition: background 120ms ease, color 120ms ease;
+}
+.chip:hover {
+  background: rgba(255, 255, 255, 0.22);
+}
+.chip.recording {
+  background: rgba(255, 100, 89, 0.28);
+  color: #fff;
+  border-color: rgba(255, 100, 89, 0.55);
+  animation: pulse 1.1s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+.hint {
+  margin: 10px 16px 0;
+  font-size: 10.5px;
+  line-height: 1.45;
+  color: var(--muted);
+}
+.hint.hidden {
+  display: none;
+}
+
+.links {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin: 10px 16px 0;
+  font-size: 10.5px;
+  color: var(--muted);
+}
+.links a {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--muted);
+  padding: 2px 4px;
+  border-radius: 4px;
+  transition: color 120ms ease, background 120ms ease;
+}
+.links a:hover {
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.06);
+  text-decoration: none;
+}
+.links .dot {
+  opacity: 0.5;
+}
+
+/* Footer ---------------------------------------------------------------- */
+.footer {
+  display: flex;
+  align-items: stretch;
+  gap: 8px;
+  padding: 12px 14px 14px;
+}
+.footer button {
+  flex: 1 1 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 0.5px solid rgba(255, 255, 255, 0.08);
+  font-size: 12.5px;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-family: inherit;
+  white-space: nowrap;
+  transition: background 120ms ease, color 120ms ease;
+}
+.btn-icon {
+  flex: none;
+  display: block;
+}
+.ghost {
+  color: var(--muted);
+}
+.ghost:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text);
+}
+.quit {
+  color: var(--danger);
+}
+.quit:hover {
+  background: rgba(255, 100, 89, 0.12);
+}

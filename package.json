@@ -1,0 +1,89 @@
+{
+  "name": "cursor-highlighter",
+  "productName": "Cursor HighLighter",
+  "version": "1.0.0",
+  "description": "Menu bar app that draws a colored ring around your cursor and shows keystrokes on screen — perfect for screen recordings and demos.",
+  "main": "src/main.js",
+  "author": {
+    "name": "Kewal Kanojia",
+    "email": "kanojiakr@gmail.com"
+  },
+  "license": "MIT",
+  "keywords": [
+    "cursor",
+    "highlighter",
+    "mouse",
+    "screen-recording",
+    "menu-bar",
+    "electron",
+    "macos",
+    "windows"
+  ],
+  "scripts": {
+    "start": "electron .",
+    "rebuild": "electron-builder install-app-deps",
+    "dist": "electron-builder",
+    "dist:mac": "electron-builder --mac",
+    "dist:win": "electron-builder --win",
+    "release": "electron-builder --publish always"
+  },
+  "dependencies": {
+    "uiohook-napi": "^1.5.5"
+  },
+  "devDependencies": {
+    "electron": "^33.2.1",
+    "electron-builder": "^25.1.8"
+  },
+  "build": {
+    "appId": "com.kewalkanojia.cursorhighlighter",
+    "productName": "Cursor HighLighter",
+    "copyright": "Copyright © 2026 Kewal Kanojia",
+    "artifactName": "${name}-${version}-${os}-${arch}.${ext}",
+    "files": [
+      "src/**/*",
+      "assets/**/*",
+      "!**/*.map",
+      "!**/*.md"
+    ],
+    "directories": {
+      "buildResources": "build",
+      "output": "dist"
+    },
+    "mac": {
+      "category": "public.app-category.utilities",
+      "icon": "build/icon.icns",
+      "target": [
+        { "target": "dmg", "arch": ["arm64", "x64"] },
+        { "target": "zip", "arch": ["arm64", "x64"] }
+      ],
+      "hardenedRuntime": true,
+      "gatekeeperAssess": false,
+      "extendInfo": {
+        "LSUIElement": true,
+        "NSAppleEventsUsageDescription": "Cursor HighLighter needs Accessibility access to detect clicks and keystrokes globally."
+      }
+    },
+    "dmg": {
+      "sign": false
+    },
+    "win": {
+      "icon": "build/icon.ico",
+      "target": [
+        { "target": "nsis", "arch": ["x64", "arm64"] },
+        { "target": "portable", "arch": ["x64"] }
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "Cursor HighLighter"
+    },
+    "publish": {
+      "provider": "github",
+      "releaseType": "release"
+    }
+  }
+}
