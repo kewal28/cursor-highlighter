@@ -100,13 +100,22 @@ Grab the DMG for your chip from the
 Open the DMG and drag *Cursor HighLighter* into `/Applications`.
 
 > **First-launch Gatekeeper bypass.** Because the build isn't signed with an
-> Apple Developer certificate yet, macOS blocks it on first launch. Right-click
-> the app → **Open** → **Open**. Or, if that dialog doesn't appear:
+> Apple Developer certificate yet, macOS shows one of two messages the first
+> time you launch it:
 >
-> ```bash
-> xattr -cr "/Applications/Cursor HighLighter.app"
-> open -a "Cursor HighLighter"
-> ```
+> - *"Cursor HighLighter cannot be opened because the developer cannot be
+>   verified"* → right-click the app → **Open** → **Open**.
+> - *"Cursor HighLighter.app is damaged and can't be opened"* → macOS's
+>   quarantine flag is more aggressive. Strip it manually:
+>
+>   ```bash
+>   xattr -cr "/Applications/Cursor HighLighter.app"
+>   open -a "Cursor HighLighter"
+>   ```
+>
+> Homebrew installs run the second command automatically via a `postflight`
+> step in the cask — you'll only hit these prompts if you installed the DMG
+> directly.
 
 ### Windows — direct download
 
