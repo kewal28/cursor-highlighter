@@ -29,8 +29,12 @@ This folder contains a Homebrew **Cask** template so you can publish a tap.
 4. Commit and push. Users can install with:
 
    ```bash
-   brew install --cask kewal28/cursor-highlighter/cursor-highlighter
+   brew tap kewal28/cursor-highlighter
+   brew install --cask cursor-highlighter
    ```
+
+   (Or the one-liner form, which auto-taps on first use:
+   `brew install --cask kewal28/cursor-highlighter/cursor-highlighter`.)
 
 ## Optional — automate
 

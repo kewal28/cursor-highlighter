@@ -142,6 +142,12 @@ function applySettingsToUI(s) {
 async function init() {
   applySettingsToUI(await window.bridge.getSettings());
   if (!isMac) hint.classList.add('hidden');
+
+  // Sync when state changes from outside — global shortcut, tray menu, reset.
+  window.bridge.onSettings((s) => {
+    if (recording) return; // don't clobber the shortcut being recorded
+    applySettingsToUI(s);
+  });
 }
 
 const bindings = [

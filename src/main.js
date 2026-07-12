@@ -110,6 +110,15 @@ function broadcast(channel, payload) {
   for (const win of overlays.values()) {
     if (!win.isDestroyed()) win.webContents.send(channel, payload);
   }
+  // Settings popup also listens for 'settings' pushes so it can reflect
+  // state changes triggered from outside (global shortcut, tray menu, reset).
+  if (
+    channel === 'settings' &&
+    settingsWindow &&
+    !settingsWindow.isDestroyed()
+  ) {
+    settingsWindow.webContents.send(channel, payload);
+  }
 }
 
 // ---------------------------------------------------------------------------

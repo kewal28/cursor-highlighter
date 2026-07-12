@@ -9,7 +9,11 @@
 #
 # Users can then install with:
 #
-#   brew install --cask kewal28/cursor-highlighter/cursor-highlighter
+#   brew tap kewal28/cursor-highlighter
+#   brew install --cask cursor-highlighter
+#
+# (Or the one-liner form which auto-taps on first use:
+#   brew install --cask kewal28/cursor-highlighter/cursor-highlighter)
 #
 
 cask "cursor-highlighter" do
