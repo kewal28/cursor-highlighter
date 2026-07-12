@@ -60,21 +60,25 @@ Menu-bar only — no Dock icon, no window clutter. macOS & Windows.
 
 ```bash
 brew tap kewal28/cursor-highlighter
+brew trust kewal28/cursor-highlighter        # one-time consent for third-party taps
 brew install --cask cursor-highlighter
 ```
 
-The first line adds the tap once (`kewal28/homebrew-cursor-highlighter`).
-After that, `brew upgrade cursor-highlighter` picks up new releases like any
-other cask.
+- The first line adds the tap (`kewal28/homebrew-cursor-highlighter`).
+- The second tells Homebrew you consent to installing from a third-party tap
+  — required since Homebrew 4.6 for any tap outside the official
+  Homebrew organization.
+- Both are one-time steps. `brew upgrade cursor-highlighter` picks up future
+  releases automatically.
 
 <details>
-<summary>One-liner alternative (no separate tap step)</summary>
+<summary>Prefer a one-liner?</summary>
 
 ```bash
-brew install --cask kewal28/cursor-highlighter/cursor-highlighter
+brew tap kewal28/cursor-highlighter && \
+  brew trust kewal28/cursor-highlighter && \
+  brew install --cask cursor-highlighter
 ```
-
-Homebrew auto-taps on first use. Slightly longer to type, same end result.
 
 </details>
 
