@@ -56,66 +56,88 @@ Menu-bar only — no Dock icon, no window clutter. macOS & Windows.
 
 ## Install
 
-### macOS — Homebrew (recommended)
+Three one-command paths. Pick whichever you prefer.
+
+### macOS — one-line curl install (fastest)
 
 ```bash
-brew tap kewal28/cursor-highlighter
-brew trust kewal28/cursor-highlighter        # one-time consent for third-party taps
-brew install --cask cursor-highlighter
+curl -fsSL https://raw.githubusercontent.com/kewal28/cursor-highlighter/main/install.sh | bash
 ```
 
-- The first line adds the tap (`kewal28/homebrew-cursor-highlighter`).
-- The second tells Homebrew you consent to installing from a third-party tap
-  — required since Homebrew 4.6 for any tap outside the official
-  Homebrew organization.
-- Both are one-time steps. `brew upgrade cursor-highlighter` picks up future
-  releases automatically.
+Detects your architecture, downloads the matching DMG from the latest
+release, drops the app into `/Applications`, clears the quarantine flag,
+and launches it. Works on Apple Silicon and Intel.
 
 <details>
-<summary>Prefer a one-liner?</summary>
+<summary>What the script does (read before piping to bash, always)</summary>
+
+Full source: [`install.sh`](./install.sh). Summary:
+
+1. Detects `arm64` vs `x64` from `uname -m`.
+2. Fetches the latest release metadata from the GitHub API.
+3. Downloads `cursor-highlighter-<version>-mac-<arch>.dmg` to `/tmp`.
+4. Mounts it, copies `Cursor HighLighter.app` to `/Applications`, unmounts.
+5. `xattr -cr` to remove Gatekeeper's quarantine flag on the unsigned build.
+6. `open -a "Cursor HighLighter"`.
+
+If you prefer, download and read it first:
 
 ```bash
-brew tap kewal28/cursor-highlighter && \
-  brew trust kewal28/cursor-highlighter && \
-  brew install --cask cursor-highlighter
+curl -fsSLO https://raw.githubusercontent.com/kewal28/cursor-highlighter/main/install.sh
+less install.sh
+bash install.sh
 ```
 
 </details>
 
-The tap lives at [`kewal28/homebrew-cursor-highlighter`](https://github.com/kewal28/homebrew-cursor-highlighter)
-and pulls the latest DMG directly from GitHub Releases. See
-[Publishing to a Homebrew tap](#publishing-to-a-homebrew-tap) if you're
-setting up the tap for the first time.
+### macOS — Homebrew
 
-### macOS — direct download
+```bash
+brew tap kewal28/cursor-highlighter && brew trust kewal28/cursor-highlighter && brew install --cask cursor-highlighter
+```
 
-Grab the DMG for your chip from the
-[Releases page](https://github.com/kewal28/cursor-highlighter/releases):
+Three sub-commands chained into one paste. All one-time:
 
-| Chip | File |
-|-----|-----|
-| Apple Silicon | `cursor-highlighter-<version>-mac-arm64.dmg` |
-| Intel | `cursor-highlighter-<version>-mac-x64.dmg` |
+- `brew tap` — adds the tap `kewal28/homebrew-cursor-highlighter`.
+- `brew trust` — required by Homebrew 4.6+ for any tap outside the official
+  Homebrew organization. One-time consent per machine.
+- `brew install --cask cursor-highlighter` — the actual install.
 
-Open the DMG and drag *Cursor HighLighter* into `/Applications`.
+From then on:
 
-> **First-launch Gatekeeper bypass.** Because the build isn't signed with an
-> Apple Developer certificate yet, macOS shows one of two messages the first
-> time you launch it:
->
-> - *"Cursor HighLighter cannot be opened because the developer cannot be
->   verified"* → right-click the app → **Open** → **Open**.
-> - *"Cursor HighLighter.app is damaged and can't be opened"* → macOS's
->   quarantine flag is more aggressive. Strip it manually:
->
->   ```bash
->   xattr -cr "/Applications/Cursor HighLighter.app"
->   open -a "Cursor HighLighter"
->   ```
->
-> Homebrew installs run the second command automatically via a `postflight`
-> step in the cask — you'll only hit these prompts if you installed the DMG
-> directly.
+```bash
+brew upgrade --cask cursor-highlighter        # future releases
+brew uninstall --cask cursor-highlighter      # remove
+```
+
+The cask's `postflight` step automatically strips the quarantine flag,
+so you'll never see the "damaged" Gatekeeper prompt.
+
+### macOS — manual DMG download
+
+If you'd rather see what you're installing:
+
+1. Grab the DMG for your chip from the
+   [Releases page](https://github.com/kewal28/cursor-highlighter/releases):
+
+   | Chip | File |
+   |-----|-----|
+   | Apple Silicon (M1/M2/M3/M4) | `cursor-highlighter-<version>-mac-arm64.dmg` |
+   | Intel | `cursor-highlighter-<version>-mac-x64.dmg` |
+
+2. Double-click the DMG.
+3. Drag *Cursor HighLighter* into `/Applications`.
+4. On first launch macOS may block the unsigned build:
+
+   ```bash
+   xattr -cr "/Applications/Cursor HighLighter.app"
+   open -a "Cursor HighLighter"
+   ```
+
+> **Why the extra step?** The build isn't yet signed with a paid Apple
+> Developer ID certificate, so macOS auto-quarantines the DMG on download.
+> `xattr -cr` clears that. The `curl` and `brew` installs above do this
+> for you.
 
 ### Windows — direct download
 
